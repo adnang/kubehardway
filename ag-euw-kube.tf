@@ -3,6 +3,7 @@ resource "azurerm_resource_group" "kube" {
   location = "West Europe"
 }
 
+## Network Resources
 resource "azurerm_network_security_group" "kube" {
   name                = "ag-euw-kube-nsg"
   location            = "${azurerm_resource_group.kube.location}"
@@ -46,6 +47,8 @@ resource "azurerm_virtual_network" "kube" {
   }
 }
 
+## Load Balancer Resources
+
 resource "azurerm_public_ip" "kubeapi" {
   name                         = "ag-euw-kube-api-pip"
   location                     = "${azurerm_resource_group.kube.location}"
@@ -68,4 +71,12 @@ resource "azurerm_lb_backend_address_pool" "kubeapi" {
   resource_group_name = "${azurerm_resource_group.kube.name}"
   loadbalancer_id     = "${azurerm_lb.kubeapi.id}"
   name                = "kubeapi-lb-pool"
+}
+
+## Compute Resources
+
+resource "azurerm_availability_set" "kubeapi" {
+  name                = "ag-euw-kube-api-as"
+  location            = "${azurerm_resource_group.kube.location}"
+  resource_group_name = "${azurerm_resource_group.kube.name}"
 }

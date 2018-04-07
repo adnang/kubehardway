@@ -1,4 +1,4 @@
 az network nsg rule list -g ag-euw-kube-rg --nsg-name ag-euw-kube-nsg --query "[].{Name:name, Direction:direction, Priority:priority, Port:destinationPortRange}" -o table
 
-az network public-ip list --query="[?name=='kubernetes-pip'].{ResourceGroup:resourceGroup, \
+az network public-ip list --query="[?name=='ag-euw-kube-api-pip'].{ResourceGroup:resourceGroup, \
   Region:location,Allocation:publicIpAllocationMethod,IP:ipAddress}" -o table
