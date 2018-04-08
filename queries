@@ -2,3 +2,5 @@ az network nsg rule list -g ag-euw-kube-rg --nsg-name ag-euw-kube-nsg --query "[
 
 az network public-ip list --query="[?name=='ag-euw-kube-api-pip'].{ResourceGroup:resourceGroup, \
   Region:location,Allocation:publicIpAllocationMethod,IP:ipAddress}" -o table
+
+TF_VAR_apivmpwd=<> TF_VAR_mgmtvmpwd=<> terraform apply
